@@ -56,19 +56,35 @@ $('#btnShowDogs').addClass("active");
 //The listener's function will toggle the `#dogs` and `#cats` divs,
 //and toggle which button has the `active` class
 
+let buttons = $('.btn-group');
+
+buttons.on('click', function(event) {
+    $('#dogs, #cats').toggle("fast");
+    $('#btnShowDogs, #btnShowCats').toggleClass("active");
+});
 
 
 
 //Change the `cursor` CSS property of the images
 
-
+$('img').css("cursor", "pointer");
 
 
 //Add the `data-bs-toggle` and `data-bs-target` attributes to the images
 
 
-
+$('img').attr('data-bs-toggle', 'modal');
+$('img').attr('data-bs-target', '#modalTest');
 
 //Ad an event listener to the modal for `show.bs.modal` events.
 //The listener's function will replace the modal's image `src` and
 //`alt` attributes with the values from the clicked image.
+
+
+$('#modalTest').on("show.bs.modal", function(event){
+    var imageClicked = $(event.relatedTarget);
+    var srcClicked = imageClicked.attr("src");
+    var altClicked = imageClicked.attr("alt");
+    $("#modalImage").attr("src", srcClicked);
+    $("#modalImage").attr("alt", altClicked);
+});
